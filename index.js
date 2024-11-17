@@ -78,6 +78,12 @@ const questions = [
         message: "Add tests for your application",
         name: "Tests",
       },
+      {
+        type: "input",
+        message: "Add your preferred method of contact",
+        name: "Contact",
+      },
+      
     ]
 
 function writeToFile(fileName, data) {
@@ -146,6 +152,9 @@ function writeToFile(fileName, data) {
     }
     if (answers.Tests) {
         data += `## Tests\n${answers.Tests}\n\n`;
+    }
+    if (answers.Contact) {
+      data+= `## Questions \n If you have questions please reach out to me at ${answers.Contact}\n\n`;
     }
 
     writeToFile('README.md', data);
