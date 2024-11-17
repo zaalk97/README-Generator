@@ -4,7 +4,7 @@
 Use this program to quickly and efficiently create a high quality README for your projects.
 
 ## Usage
-Rune 'node index.js' in your terminal and follow the prompts to enter the information for your README.
+Run 'node index.js' in your terminal and follow the prompts to enter the information for your README.
 
 ## Collaborators
 Created by Zaal Khazraeinazmpour with help from Xpert Learning Assistant AI
