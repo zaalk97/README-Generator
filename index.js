@@ -85,13 +85,13 @@ function writeToFile(fileName, data) {
                `## Description\n${answers.DescriptionText}\n\n` +
                `## Table of Contents\n\n`;
     if (answers.TableOfContents1) {
-        data += `1. [#${answers.TableOfContents1.toLowerCase().replace(/\s+/g,'-')}]\n`;
+        data += `1. [${answers.TableOfContents1}](#${answers.TableOfContents1.toLowerCase().replace(/\s+/g,'-')})\n`;
     }
     if (answers.TableOfContents2) {
-        data += `2. [#${answers.TableOfContents2.toLowerCase().replace(/\s+/g,'-')}]\n`;
+        data += `2. [${answers.TableOfContents2}](#${answers.TableOfContents2.toLowerCase().replace(/\s+/g,'-')})\n`;
     }
     if (answers.TableOfContents3) {
-        data += `3. [#${answers.TableOfContents3.toLowerCase().replace(/\s+/g,'-')}]\n`;
+        data += `3. [${answers.TableOfContents3}](#${answers.TableOfContents3.toLowerCase().replace(/\s+/g,'-')})\n`;
     }
     if (answers.TableOfContents1 || answers.TableOfContents2 || answers.TableOfContents3) {
         data += '\n';
