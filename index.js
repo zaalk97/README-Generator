@@ -80,6 +80,7 @@ function writeToFile(fileName, data) {
     });
   }
 
+  function init() {
   inquirer.prompt(questions).then((answers) => {
     let data = `## ${answers.TitleText}\n\n` +
                `## Description\n${answers.DescriptionText}\n\n` +
@@ -123,3 +124,5 @@ function writeToFile(fileName, data) {
 
     writeToFile('README.md', data);
   });
+  }
+  init();
