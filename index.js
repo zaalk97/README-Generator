@@ -1,7 +1,13 @@
 import inquirer from "inquirer";
 import fs from 'fs';
-inquirer
 
+
+function renderLicenseBadge(license) {
+  if (license) {
+    return `![License](https://img.shields.io/badge/license-${license}-blue.svg)`;
+  }
+  return '';
+}
 const questions = [
     {
       type: "input",
@@ -44,9 +50,13 @@ const questions = [
         name: "Collaborators",
       },
       {
-        type: "input",
-        message: "Add your License",
-        name: "License",
+        type: "list",
+        message: "Choose your License",
+        name: "license",
+        choices: ["MITLicense","Apache2.0",
+          "GNUGeneralPublic License(GPL)v3",
+          "MozillaPublicLicense 2.0",
+          "BSD3-ClauseLicense"]
       },
       {
         type: "input",
@@ -80,9 +90,27 @@ function writeToFile(fileName, data) {
     });
   }
 
+  function renderLicenseSection(license) {
+    switch (license) {
+        case 'MITLicense':
+            return `## License\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.`;
+        case 'Apache2.0':
+            return `## License\nThis project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.`;
+        case 'GNUGeneralPublicLicense(GPL) v3':
+            return `## License\nThis project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.`;
+        case 'MozillaPublicLicense2.0':
+              return `## License\nThis project is licensed under the Mozilla Public License 2.0. See the [LICENSE](LICENSE) file for details.`;
+        case 'BSD3-ClauseLicense':
+                return `## License\nThis project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE) file for details.`;
+        default:
+            return `## License\nThis project is not licensed under any specific license.`;
+    }
+}
+
   function init() {
   inquirer.prompt(questions).then((answers) => {
-    let data = `## ${answers.TitleText}\n\n` +
+    const badge = renderLicenseBadge(answers.license);
+    let data = `## ${answers.TitleText} ${badge} \n\n` +
                `## Description\n${answers.DescriptionText}\n\n` +
                `## Table of Contents\n\n`;
     if (answers.TableOfContents1) {
@@ -106,11 +134,9 @@ function writeToFile(fileName, data) {
     if (answers.Collaborators) {
         data += `## Collaborators\n${answers.Collaborators}\n\n`;
     }
-    if (answers.License) {
-        data += `## License\n${answers.License}\n\n`;
-    }
-    if (answers.Badges) {
-        data += `## Badges\n${answers.Badges}\n\n`;
+    const licenseSelection = renderLicenseSection(answers.license);
+    if (answers.license) {
+      data += `## License\n\n${licenseSelection}\n\n`;
     }
     if (answers.Features) {
         data += `## Features\n${answers.Features}\n\n`;
@@ -119,10 +145,11 @@ function writeToFile(fileName, data) {
         data += `## Contribution\n${answers.Contribution}\n\n`;
     }
     if (answers.Tests) {
-        data += `## Test\n${answers.Tests}\n\n`;
+        data += `## Tests\n${answers.Tests}\n\n`;
     }
 
     writeToFile('README.md', data);
   });
   }
   init();
+  
