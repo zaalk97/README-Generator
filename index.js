@@ -2,12 +2,6 @@ import inquirer from "inquirer";
 import fs from 'fs';
 
 
-function renderLicenseBadge(license) {
-  if (license) {
-    return `![License](https://img.shields.io/badge/license-${license}-blue.svg)`;
-  }
-  return '';
-}
 const questions = [
     {
       type: "input",
@@ -37,51 +31,51 @@ const questions = [
       {
         type: "input",
         message: "Provide step by step instructions for installation.",
-        name: "Instructions",
+        name: "instructions",
       },
       {
         type: "input",
         message: "Provide instructions and examples for use.",
-        name: "Usage",
+        name: "usage",
       },
       {
         type: "input",
         message: "If there are any collaborators include them here.",
-        name: "Collaborators",
+        name: "collaborators",
       },
       {
         type: "list",
         message: "Choose your License",
         name: "license",
-        choices: ["MITLicense","Apache2.0",
-          "GNUGeneralPublic License(GPL)v3",
-          "MozillaPublicLicense 2.0",
-          "BSD3-ClauseLicense"]
+        choices: ["MIT License","Apache 2.0",
+          "GNU General Public License (GPL)v3",
+          "Mozilla Public License 2.0",
+          "BSD3-Clause License"]
       },
       {
         type: "input",
         message: "Add your badges",
-        name: "Badges",
+        name: "badges",
       },
       {
         type: "input",
         message: "List your projects features here",
-        name: "Features",
+        name: "features",
       },
       {
         type: "input",
         message: "Tell people how they can contribute",
-        name: "Contribution",
+        name: "contribution",
       },
       {
         type: "input",
         message: "Add tests for your application",
-        name: "Tests",
+        name: "tests",
       },
       {
         type: "input",
         message: "Add your preferred method of contact",
-        name: "Contact",
+        name: "contact",
       },
       
     ]
@@ -98,19 +92,27 @@ function writeToFile(fileName, data) {
 
   function renderLicenseSection(license) {
     switch (license) {
-        case 'MITLicense':
+        case 'MIT License':
             return `## License\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.`;
-        case 'Apache2.0':
+        case 'Apache 2.0':
             return `## License\nThis project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.`;
-        case 'GNUGeneralPublicLicense(GPL) v3':
+        case 'GNU General Public License (GPL)v3':
             return `## License\nThis project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.`;
-        case 'MozillaPublicLicense2.0':
+        case 'Mozilla Public License 2.0':
               return `## License\nThis project is licensed under the Mozilla Public License 2.0. See the [LICENSE](LICENSE) file for details.`;
-        case 'BSD3-ClauseLicense':
+        case 'BSD3-Clause License':
                 return `## License\nThis project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE) file for details.`;
         default:
             return `## License\nThis project is not licensed under any specific license.`;
     }
+}
+
+  function renderLicenseBadge(license) {
+  if (license) {
+    const formattedLicense = license.replace(/ /g, '%20');
+    return `![License](https://img.shields.io/badge/license-${formattedLicense}-blue.svg)`;
+  }
+  return '';
 }
 
   function init() {
@@ -131,30 +133,30 @@ function writeToFile(fileName, data) {
     if (answers.TableOfContents1 || answers.TableOfContents2 || answers.TableOfContents3) {
         data += '\n';
     }
-    if (answers.Instructions) {
-        data += `## Instructions\n${answers.Instructions}\n\n`;
+    if (answers.instructions) {
+        data += `## Instructions\n${answers.instructions}\n\n`;
     }
-    if (answers.Usage) {
-        data += `## Usage\n${answers.Usage}\n\n`;
+    if (answers.usage) {
+        data += `## Usage\n${answers.usage}\n\n`;
     }
-    if (answers.Collaborators) {
-        data += `## Collaborators\n${answers.Collaborators}\n\n`;
+    if (answers.collaborators) {
+        data += `## Collaborators\n${answers.collaborators}\n\n`;
     }
     const licenseSelection = renderLicenseSection(answers.license);
     if (answers.license) {
       data += `## License\n\n${licenseSelection}\n\n`;
     }
-    if (answers.Features) {
-        data += `## Features\n${answers.Features}\n\n`;
+    if (answers.features) {
+        data += `## Features\n${answers.features}\n\n`;
     }
-    if (answers.Contribution) {
-        data += `## Contribution\n${answers.Contribution}\n\n`;
+    if (answers.contribution) {
+        data += `## Contribution\n${answers.contribution}\n\n`;
     }
-    if (answers.Tests) {
-        data += `## Tests\n${answers.Tests}\n\n`;
+    if (answers.tests) {
+        data += `## Tests\n${answers.tests}\n\n`;
     }
-    if (answers.Contact) {
-      data+= `## Questions \n If you have questions please reach out to me at ${answers.Contact}\n\n`;
+    if (answers.contact) {
+      data+= `## Questions \n If you have questions please reach out to me at ${answers.contact}\n\n`;
     }
 
     writeToFile('README.md', data);
