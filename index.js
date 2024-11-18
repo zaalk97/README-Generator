@@ -93,17 +93,17 @@ function writeToFile(fileName, data) {
   function renderLicenseSection(license) {
     switch (license) {
         case 'MIT License':
-            return `## License\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.`;
+            return `License\nThis project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.`;
         case 'Apache 2.0':
-            return `## License\nThis project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.`;
+            return `License\nThis project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.`;
         case 'GNU General Public License (GPL)v3':
-            return `## License\nThis project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.`;
+            return `License\nThis project is licensed under the GNU General Public License v3.0. See the [LICENSE](LICENSE) file for details.`;
         case 'Mozilla Public License 2.0':
-              return `## License\nThis project is licensed under the Mozilla Public License 2.0. See the [LICENSE](LICENSE) file for details.`;
+              return `License\nThis project is licensed under the Mozilla Public License 2.0. See the [LICENSE](LICENSE) file for details.`;
         case 'BSD3-Clause License':
-                return `## License\nThis project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE) file for details.`;
+                return `License\nThis project is licensed under the BSD 3-Clause License. See the [LICENSE](LICENSE) file for details.`;
         default:
-            return `## License\nThis project is not licensed under any specific license.`;
+            return `License\nThis project is not licensed under any specific license.`;
     }
 }
 
@@ -143,6 +143,7 @@ function writeToFile(fileName, data) {
         data += `## Collaborators\n${answers.collaborators}\n\n`;
     }
     const licenseSelection = renderLicenseSection(answers.license);
+    console.log(`You have selected ${answers.license}.`);
     if (answers.license) {
       data += `## License\n\n${licenseSelection}\n\n`;
     }
@@ -155,6 +156,9 @@ function writeToFile(fileName, data) {
     if (answers.tests) {
         data += `## Tests\n${answers.tests}\n\n`;
     }
+    if (answers.badges) {
+      data += `## Badges\n${answers.badges}\n\n`;
+  }
     if (answers.contact) {
       data+= `## Questions \n If you have questions please reach out to me at ${answers.contact}\n\n`;
     }
