@@ -1,7 +1,7 @@
 ## Professional README Generator
 
 ## Description
-Use this program to quickly and efficiently create a high quality README for your projects.
+This program is a README generator that uses command line inputs. Use it to create a professional README.
 
 ## Usage
 Run 'node index.js' in your terminal and follow the prompts to enter the information for your README.
