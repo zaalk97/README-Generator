@@ -2,6 +2,7 @@
 
 ## Description
 This program is a README generator that uses command line inputs. Use it to create a professional README.
+If you would like to see a demonstration look here https://youtu.be/livvqEk_hO0
 
 ## Usage
 Run 'node index.js' in your terminal and follow the prompts to enter the information for your README.
